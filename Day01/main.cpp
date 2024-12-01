@@ -1,7 +1,7 @@
 #include "../Utils/Utils.h"
 #include <iostream>
 #include <algorithm>
-#include <map>
+#include <sstream>
 
 auto Part1(const std::vector<std::string>& input)
 {
@@ -12,16 +12,22 @@ auto Part1(const std::vector<std::string>& input)
 
 	for (const auto& line : input)
 	{
+#ifdef INPUT_TESTING
 		std::cout << line << '\n';
+#endif
 
 		std::string number1;
 		std::string number2;
 
+		// The two numbers can be separated using a stringstream since they are
+		// separated by a space (or three).
 		std::istringstream inputStringStream(line);
 		inputStringStream >> number1 >> number2;
 
+#ifdef INPUT_TESTING
 		std::cout << "Number 1: " << number1 << '\n';
 		std::cout << "Number 2: " << number2 << '\n';
+#endif
 
 		list1.push_back(std::stoi(number1));
 		list2.push_back(std::stoi(number2));
@@ -30,6 +36,7 @@ auto Part1(const std::vector<std::string>& input)
 	std::sort(list1.begin(), list1.end(), [](int a, int b) { return a < b; });
 	std::sort(list2.begin(), list2.end(), [](int a, int b) { return a < b; });
 
+#ifdef INPUT_TESTING
 	std::cout << "List 1 Sorted:\n";
 	for (const auto& i : list1)
 	{
@@ -42,12 +49,15 @@ auto Part1(const std::vector<std::string>& input)
 		std::cout << i << '\n';
 	}
 
-	int sum = 0;
 	std::cout << "List difference:\n";
+#endif
+	int sum = 0;
 	for (int i = 0; i < list1.size(); i++)
 	{
 		int diff = abs(list1[i] - list2[i]);
+#ifdef INPUT_TESTING
 		std::cout << diff << '\n';
+#endif
 		sum += diff;
 	}
 
@@ -63,7 +73,9 @@ auto Part2(const std::vector<std::string>& input)
 
 	for (const auto& line : input)
 	{
+#ifdef INPUT_TESTING
 		std::cout << line << '\n';
+#endif
 
 		std::string number1;
 		std::string number2;
@@ -71,23 +83,29 @@ auto Part2(const std::vector<std::string>& input)
 		std::istringstream inputStringStream(line);
 		inputStringStream >> number1 >> number2;
 
+#ifdef INPUT_TESTING
 		std::cout << "Number 1: " << number1 << '\n';
 		std::cout << "Number 2: " << number2 << '\n';
+#endif
 
 		list1.push_back(std::stoi(number1));
 		list2.push_back(std::stoi(number2));
 	}
 
-	// To find the similarity score, we need to loop each element of list1 and
-	// multiply it by the amount of times that element is found in list2.
+	/*
+	To find the similarity score, we need to loop each element of list1 and
+	multiply it by the amount of times that element is found in list2.
+	*/
 	// similarityScore = list1[i] * count of list1[i] in list2
 	int similarityScoreSum = 0;
 	for (int i = 0; i < list1.size(); i++)
 	{
 		int count = static_cast<int>(std::count(list2.begin(), list2.end(), list1[i]));
 		int similarityScore = list1[i] * count;
+#ifdef INPUT_TESTING
 		std::cout << "Instances of " << list1[i] << ": " << count << '\n';
 		std::cout << "Similarity score: " << similarityScore << '\n';
+#endif
 		similarityScoreSum += similarityScore;
 	}
 
