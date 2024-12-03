@@ -6,6 +6,7 @@ auto Part1(const std::vector<std::string>& input)
 {
 	Utils::Timer timer("Part 1");
 
+	// Combine all lines into one string
 	std::string inputOneLine = "";
 	for (const auto& line : input)
 	{
@@ -13,23 +14,31 @@ auto Part1(const std::vector<std::string>& input)
 		inputOneLine += line;
 	}
 
+	// Regex to match "mul(#,#)" where # is a number with 1-3 digits
+	// The regex is split into 3 capture groups: "mul", "num1", "num2"
 	std::regex regex("(mul)\\((\\d{1,3}),(\\d{1,3})\\)");
-	std::smatch match;
+	std::smatch matchGroup;
 	std::vector<std::tuple<std::string, int, int>> matches;
 	int result = 0;
 
+	/*
+	std::regex_search() only returns the first match, so we use a while loop
+	and an iterator to search the rest of the input. When a match is found, we
+	store the capture groups in a tuple and then move the iterator to the end
+	of the match to search the rest of the input.
+	*/
 	std::string::const_iterator searchStart(inputOneLine.cbegin());
-	while (std::regex_search(searchStart, inputOneLine.cend(), match, regex))
+	while (std::regex_search(searchStart, inputOneLine.cend(), matchGroup, regex))
 	{
-		OUTPUT("Match: " << match.str() << '\n');
-		for (const auto& subMatch : match)
+		OUTPUT("Match: " << matchGroup.str() << '\n');
+		for (const auto& subMatch : matchGroup)
 		{
 			OUTPUT("  Submatch: " << subMatch << '\n');
 		}
 
-		// emplace_back constructs the tuple in place, avoiding a copy! Woah!
-		matches.emplace_back(match[1].str(), std::stoi(match[2]), std::stoi(match[3]));
-		searchStart = match.suffix().first;
+		// emplace_back() constructs the tuple in place, avoiding a copy! Woah!
+		matches.emplace_back(matchGroup[1].str(), std::stoi(matchGroup[2]), std::stoi(matchGroup[3]));
+		searchStart = matchGroup.suffix().first;
 	}
 
 	OUTPUT("Matches as tuples:\n");
@@ -53,6 +62,7 @@ auto Part2(const std::vector<std::string>& input)
 {
 	Utils::Timer timer("Part 2");
 
+	// Combine all lines into one string
 	std::string inputOneLine = "";
 	for (const auto& line : input)
 	{
@@ -60,34 +70,47 @@ auto Part2(const std::vector<std::string>& input)
 		inputOneLine += line;
 	}
 
-	std::regex regex("(?:(mul)\\((\\d{1,3}),(\\d{1,3})\\))|do\\(\\)|don't\\(\\)");
-	std::smatch match;
+	// Regex is the same as above, but will also capture "do()" and "don't()"
+	std::regex regex("(mul)\\((\\d{1,3}),(\\d{1,3})\\)|do\\(\\)|don't\\(\\)");
+	std::smatch matchGroup;
+	/*
+	In-case you didn't notice, I included a string in the tuple for the
+	operation (like multiplication) because I assumed part 2 would require it.
+	Part 2 did something different...
+	*/
 	std::vector<std::tuple<std::string, int, int>> matches;
 	int result = 0;
-	bool isEnabled = true;
+	bool isEnabled = true; // Remember, the default is true
 
+	/*
+	std::regex_search() only returns the first match, so we use a while loop
+	and an iterator to search the rest of the input. When a match is found, we
+	store the capture groups in a tuple and then move the iterator to the end
+	of the match to search the rest of the input.
+	*/
 	std::string::const_iterator searchStart(inputOneLine.cbegin());
-	while (std::regex_search(searchStart, inputOneLine.cend(), match, regex))
+	while (std::regex_search(searchStart, inputOneLine.cend(), matchGroup, regex))
 	{
-		OUTPUT("Match: " << match.str() << '\n');
-		for (const auto& subMatch : match)
+		OUTPUT("Match: " << matchGroup.str() << '\n');
+		for (const auto& subMatch : matchGroup)
 		{
 			OUTPUT("  Submatch: " << subMatch << '\n');
 		}
 
-		if (match.str() == "do()")
+		if (matchGroup.str() == "do()")
 		{
 			isEnabled = true;
 		}
-		else if (match.str() == "don't()")
+		else if (matchGroup.str() == "don't()")
 		{
 			isEnabled = false;
 		}
 		else if (isEnabled)
 		{
-			matches.emplace_back(match[1].str(), std::stoi(match[2]), std::stoi(match[3]));
+			// emplace_back() constructs the tuple in place, avoiding a copy! Woah!
+			matches.emplace_back(matchGroup[1].str(), std::stoi(matchGroup[2]), std::stoi(matchGroup[3]));
 		}
-		searchStart = match.suffix().first;
+		searchStart = matchGroup.suffix().first;
 	}
 
 	OUTPUT("Matches as tuples:\n");
@@ -109,7 +132,7 @@ auto Part2(const std::vector<std::string>& input)
 
 int main(int argc, char** argv)
 {
-	Utils::Timer timer("Day 00");
+	Utils::Timer timer("Day 02");
 	try
 	{
 #ifdef INPUT_TESTING
