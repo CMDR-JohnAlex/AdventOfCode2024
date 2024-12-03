@@ -53,12 +53,58 @@ auto Part2(const std::vector<std::string>& input)
 {
 	Utils::Timer timer("Part 2");
 
+	std::string inputOneLine = "";
 	for (const auto& line : input)
 	{
 		OUTPUT(line << '\n');
+		inputOneLine += line;
 	}
 
-	return 0;
+	std::regex regex("(?:(mul)\\((\\d{1,3}),(\\d{1,3})\\))|do\\(\\)|don't\\(\\)");
+	std::smatch match;
+	std::vector<std::tuple<std::string, int, int>> matches;
+	int result = 0;
+	bool isEnabled = true;
+
+	std::string::const_iterator searchStart(inputOneLine.cbegin());
+	while (std::regex_search(searchStart, inputOneLine.cend(), match, regex))
+	{
+		OUTPUT("Match: " << match.str() << '\n');
+		for (const auto& subMatch : match)
+		{
+			OUTPUT("  Submatch: " << subMatch << '\n');
+		}
+
+		if (match.str() == "do()")
+		{
+			isEnabled = true;
+		}
+		else if (match.str() == "don't()")
+		{
+			isEnabled = false;
+		}
+		else if (isEnabled)
+		{
+			matches.emplace_back(match[1].str(), std::stoi(match[2]), std::stoi(match[3]));
+		}
+		searchStart = match.suffix().first;
+	}
+
+	OUTPUT("Matches as tuples:\n");
+	for (const auto& [operation, num1, num2] : matches)
+	{
+		OUTPUT(operation << " " << num1 << " " << num2 << '\n');
+	}
+
+	for (const auto& [operation, num1, num2] : matches)
+	{
+		if (operation == "mul")
+		{
+			result += num1 * num2;
+		}
+	}
+
+	return result;
 }
 
 int main(int argc, char** argv)
