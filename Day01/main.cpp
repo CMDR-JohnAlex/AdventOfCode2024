@@ -12,9 +12,7 @@ auto Part1(const std::vector<std::string>& input)
 
 	for (const auto& line : input)
 	{
-#ifdef INPUT_TESTING
-		std::cout << line << '\n';
-#endif
+		OUTPUT(line << '\n');
 
 		std::string number1;
 		std::string number2;
@@ -24,10 +22,8 @@ auto Part1(const std::vector<std::string>& input)
 		std::istringstream inputStringStream(line);
 		inputStringStream >> number1 >> number2;
 
-#ifdef INPUT_TESTING
-		std::cout << "Number 1: " << number1 << '\n';
-		std::cout << "Number 2: " << number2 << '\n';
-#endif
+		OUTPUT("Number 1: " << number1 << '\n');
+		OUTPUT("Number 2: " << number2 << '\n');
 
 		list1.push_back(std::stoi(number1));
 		list2.push_back(std::stoi(number2));
@@ -36,28 +32,24 @@ auto Part1(const std::vector<std::string>& input)
 	std::sort(list1.begin(), list1.end(), [](int a, int b) { return a < b; });
 	std::sort(list2.begin(), list2.end(), [](int a, int b) { return a < b; });
 
-#ifdef INPUT_TESTING
-	std::cout << "List 1 Sorted:\n";
+	OUTPUT("List 1 Sorted:\n");
 	for (const auto& i : list1)
 	{
-		std::cout << i << '\n';
+		OUTPUT(i << '\n');
 	}
 
-	std::cout << "List 2 Sorted:\n";
+	OUTPUT("List 2 Sorted:\n");
 	for (const auto& i : list2)
 	{
-		std::cout << i << '\n';
+		OUTPUT(i << '\n');
 	}
 
-	std::cout << "List difference:\n";
-#endif
+	OUTPUT("List difference:\n");
 	int sum = 0;
 	for (int i = 0; i < list1.size(); i++)
 	{
 		int diff = abs(list1[i] - list2[i]);
-#ifdef INPUT_TESTING
-		std::cout << diff << '\n';
-#endif
+		OUTPUT(diff << '\n');
 		sum += diff;
 	}
 
@@ -73,9 +65,7 @@ auto Part2(const std::vector<std::string>& input)
 
 	for (const auto& line : input)
 	{
-#ifdef INPUT_TESTING
-		std::cout << line << '\n';
-#endif
+		OUTPUT(line << '\n');
 
 		std::string number1;
 		std::string number2;
@@ -83,10 +73,8 @@ auto Part2(const std::vector<std::string>& input)
 		std::istringstream inputStringStream(line);
 		inputStringStream >> number1 >> number2;
 
-#ifdef INPUT_TESTING
-		std::cout << "Number 1: " << number1 << '\n';
-		std::cout << "Number 2: " << number2 << '\n';
-#endif
+		OUTPUT("Number 1: " << number1 << '\n');
+		OUTPUT("Number 2: " << number2 << '\n');
 
 		list1.push_back(std::stoi(number1));
 		list2.push_back(std::stoi(number2));
@@ -102,10 +90,8 @@ auto Part2(const std::vector<std::string>& input)
 	{
 		int count = static_cast<int>(std::count(list2.begin(), list2.end(), list1[i]));
 		int similarityScore = list1[i] * count;
-#ifdef INPUT_TESTING
-		std::cout << "Instances of " << list1[i] << ": " << count << '\n';
-		std::cout << "Similarity score: " << similarityScore << '\n';
-#endif
+		OUTPUT("Instances of " << list1[i] << ": " << count << '\n');
+		OUTPUT("Similarity score: " << similarityScore << '\n');
 		similarityScoreSum += similarityScore;
 	}
 

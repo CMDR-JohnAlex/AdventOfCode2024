@@ -79,4 +79,10 @@ namespace Utils
 		std::cout << "Result: \"" << result << "\"\n\n";
 #endif
 	}
+
+#ifdef INPUT_TESTING
+#define OUTPUT(...) std::cout << __VA_ARGS__
+#else
+#define OUTPUT(...)
+#endif
 }
