@@ -8,7 +8,7 @@
 | --------------------------------------------------- | --------------------------- | --------------------------- |
 | [2024 Day 1](https://adventofcode.com/2024/day/1)   | [ :star: ](Day01/main.cpp)  | [ :star: ](Day01/main.cpp)  |
 | [2024 Day 2](https://adventofcode.com/2024/day/2)   | [ :star: ](Day02/main.cpp)  | [ :star: ](Day02/main.cpp)  |
-| [2024 Day 3](https://adventofcode.com/2024/day/3)   |                             |                             |
+| [2024 Day 3](https://adventofcode.com/2024/day/3)   | [ :star: ](Day03/main.cpp)  | [ :star: ](Day03/main.cpp)  |
 | [2024 Day 4](https://adventofcode.com/2024/day/4)   |                             |                             |
 | [2024 Day 5](https://adventofcode.com/2024/day/5)   |                             |                             |
 | [2024 Day 6](https://adventofcode.com/2024/day/6)   |                             |                             |
@@ -31,3 +31,19 @@
 | [2024 Day 23](https://adventofcode.com/2024/day/23) |                             |                             |
 | [2024 Day 24](https://adventofcode.com/2024/day/24) |                             |                             |
 | [2024 Day 24](https://adventofcode.com/2024/day/25) |                             |                             |
+
+## Goals
+
+My goal when participating in Advent of Code, is to practice my problem solving skills and practice my C++ programming skills. Some people have goals to solve the puzzles as fast as possible, or to use the least amount of RAM possible, but my goal is just to make it work.
+
+Sometimes, I realize moments after I submit my solution to the Advent of Code website, that there are pieces of code I could remove or re-write to make it overall better, but for unknown reasons, I'd like to keep them as they are when I get the stars.
+
+## Input Files
+
+As per request of [Eric Wastl](https://was.tl/), the input files are not included in this repository.
+
+The programs however, should be able to work will all input files from the Advent of Code website. That means you should be able to grab your own input files from the site, and use them with the programs in this repository.
+
+The programs read from their Day## folder, so put the input file for day 1 in the Day01 folder. `Day01/PuzzleInput.txt`.
+
+For more information, please read the Advent of Code About page: [Advent of Code - About](https://adventofcode.com/2024/about) where it says: "*Can I copy/redistribute part of Advent of Code?*"
