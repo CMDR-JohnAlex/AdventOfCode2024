@@ -7,7 +7,7 @@ auto Part1(const std::vector<std::string>& input)
 	int safeCount = 0;
 	for (const auto& line : input)
 	{
-		OUTPUT(line << '\n');
+		STRIP(std::cout << line << '\n');
 
 		std::istringstream inputStringStream(line);
 		int numberNew;
@@ -17,11 +17,11 @@ auto Part1(const std::vector<std::string>& input)
 		bool isSafe = true;
 
 		inputStringStream >> numberOld;
-		OUTPUT("NumberOld: " << numberOld << '\n');
+		STRIP(std::cout << "NumberOld: " << numberOld << '\n');
 
 		while (inputStringStream >> numberNew)
 		{
-			OUTPUT("NumberNew: " << numberNew << '\n');
+			STRIP(std::cout << "NumberNew: " << numberNew << '\n');
 
 			if (numberOld < numberNew)
 			{
@@ -35,7 +35,7 @@ auto Part1(const std::vector<std::string>& input)
 			// At least 1, at most 3
 			if (!(abs(numberNew - numberOld) >= 1) || !(abs(numberNew - numberOld) <= 3))
 			{
-				OUTPUT("Unsafe, range\n");
+				STRIP(std::cout << "Unsafe, range\n");
 				isSafe = false;
 				break;
 			}
@@ -43,7 +43,7 @@ auto Part1(const std::vector<std::string>& input)
 			// Can't increase and decrease
 			if (isIncrease && isDecrease)
 			{
-				OUTPUT("Unsafe, increase & decrease\n");
+				STRIP(std::cout << "Unsafe, increase & decrease\n");
 				isSafe = false;
 				break;
 			}
@@ -53,7 +53,7 @@ auto Part1(const std::vector<std::string>& input)
 
 		if (isSafe)
 		{
-			OUTPUT("Safe\n");
+			STRIP(std::cout << "Safe\n");
 			safeCount++;
 		}
 	}
@@ -88,7 +88,7 @@ int FindUnsafeIndex(const std::vector<int>& numbers)
 		// At least 1, at most 3
 		if (!(abs(numberNew - numberOld) >= 1) || !(abs(numberNew - numberOld) <= 3))
 		{
-			OUTPUT("Unsafe, range\n");
+			STRIP(std::cout << "Unsafe, range\n");
 			isSafe = false;
 			break;
 		}
@@ -96,7 +96,7 @@ int FindUnsafeIndex(const std::vector<int>& numbers)
 		// Can't increase and decrease
 		if (isIncrease && isDecrease)
 		{
-			OUTPUT("Unsafe, increase & decrease\n");
+			STRIP(std::cout << "Unsafe, increase & decrease\n");
 			isSafe = false;
 			break;
 		}
@@ -118,7 +118,7 @@ auto Part2(const std::vector<std::string>& input)
 	int safeCount = 0;
 	for (const auto& line : input)
 	{
-		OUTPUT("Line: " << line << '\n');
+		STRIP(std::cout << "Line: " << line << '\n');
 
 		std::istringstream inputStringStream(line);
 		std::vector<int> numbers;
@@ -133,38 +133,41 @@ auto Part2(const std::vector<std::string>& input)
 		int unsafeIndex = FindUnsafeIndex(numbers);
 		if (unsafeIndex == -1)
 		{
-			OUTPUT("Safe\n");
+			STRIP(std::cout << "Safe\n");
 			safeCount++;
 		}
 		else // I'm not very proud of this mess...
 		{
-			OUTPUT("Unsafe detected at index " << unsafeIndex << ". Trying to remove the unsafe number and check again.\n");
-			std::vector<int> numbersCopy = numbers;
-			numbersCopy.erase(numbersCopy.begin() + unsafeIndex);
-			OUTPUT("Correction Attempt 1: (Remove index)\n");
-			for (int i = 0; i < numbersCopy.size(); i++)
-			{
-				OUTPUT(numbersCopy[i] << ' ');
-			}
-			OUTPUT('\n');
+			STRIP(std::cout << "Unsafe detected at index " << unsafeIndex << ". Trying to remove the unsafe number and check again.\n";
+				std::vector<int> numbersCopy = numbers;
+				numbersCopy.erase(numbersCopy.begin() + unsafeIndex);
+				std::cout << "Correction Attempt 1: (Remove index)\n";
+				for (int i = 0; i < numbersCopy.size(); i++)
+				{
+					std::cout << numbersCopy[i] << ' ';
+				}
+				std::cout << '\n';
+			);
 			if (FindUnsafeIndex(numbersCopy) == -1)
 			{
-				OUTPUT("Safe\n");
+				STRIP(std::cout << "Safe\n");
 				safeCount++;
 				continue; // Ignore the rest, continue to the next input line.
 			}
 
 			numbersCopy = numbers;
 			numbersCopy.erase(numbersCopy.begin() + unsafeIndex + 1);
-			OUTPUT("Correction Attempt 2: (Remove index + 1)\n");
-			for (int i = 0; i < numbersCopy.size(); i++)
-			{
-				OUTPUT(numbersCopy[i] << ' ');
-			}
-			OUTPUT('\n');
+			STRIP(
+				std::cout << "Correction Attempt 2: (Remove index + 1)\n";
+				for (int i = 0; i < numbersCopy.size(); i++)
+				{
+					std::cout << numbersCopy[i] << ' ';
+				}
+				std::cout << '\n';
+			);
 			if (FindUnsafeIndex(numbersCopy) == -1)
 			{
-				OUTPUT("Safe\n");
+				STRIP(std::cout << "Safe\n");
 				safeCount++;
 				continue; // Ignore the rest, continue to the next input line.
 			}
@@ -174,21 +177,23 @@ auto Part2(const std::vector<std::string>& input)
 			{
 				numbersCopy = numbers;
 				numbersCopy.erase(numbersCopy.begin());
-				OUTPUT("Correction Attempt 3: (Remove first)\n");
-				for (int i = 0; i < numbersCopy.size(); i++)
-				{
-					OUTPUT(numbersCopy[i] << ' ');
-				}
-				OUTPUT('\n');
+				STRIP(
+					std::cout << "Correction Attempt 3: (Remove first)\n";
+					for (int i = 0; i < numbersCopy.size(); i++)
+					{
+						std::cout << numbersCopy[i] << ' ';
+					}
+					std::cout << '\n';
+				);
 				if (FindUnsafeIndex(numbersCopy) == -1)
 				{
-					OUTPUT("Safe\n");
+					STRIP(std::cout << "Safe\n");
 					safeCount++;
 					continue; // Ignore the rest, continue to the next input line.
 				}
 			}
 
-			OUTPUT("No correction(s) found. Unsafe.\n");
+			STRIP(std::cout << "No correction(s) found. Unsafe.\n");
 		}
 	}
 

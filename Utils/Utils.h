@@ -81,8 +81,8 @@ namespace Utils
 	}
 
 #ifdef INPUT_TESTING
-#define OUTPUT(...) std::cout << __VA_ARGS__
+#define STRIP(...) __VA_ARGS__
 #else
-#define OUTPUT(...)
+#define STRIP(...)
 #endif
 }

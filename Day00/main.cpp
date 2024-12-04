@@ -6,7 +6,7 @@ auto Part1(const std::vector<std::string>& input)
 
 	for (const auto& line : input)
 	{
-		OUTPUT(line << '\n');
+		STRIP(std::cout << line << '\n');
 	}
 
 	return 0;
@@ -18,7 +18,7 @@ auto Part2(const std::vector<std::string>& input)
 
 	for (const auto& line : input)
 	{
-		OUTPUT(line << '\n');
+		STRIP(std::cout << line << '\n');
 	}
 
 	return 0;

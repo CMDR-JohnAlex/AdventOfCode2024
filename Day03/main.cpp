@@ -10,7 +10,7 @@ auto Part1(const std::vector<std::string>& input)
 	std::string inputOneLine = "";
 	for (const auto& line : input)
 	{
-		OUTPUT(line << '\n');
+		STRIP(std::cout << line << '\n');
 		inputOneLine += line;
 	}
 
@@ -30,22 +30,26 @@ auto Part1(const std::vector<std::string>& input)
 	std::string::const_iterator searchStart(inputOneLine.cbegin());
 	while (std::regex_search(searchStart, inputOneLine.cend(), matchGroup, regex))
 	{
-		OUTPUT("Match: " << matchGroup.str() << '\n');
-		for (const auto& subMatch : matchGroup)
-		{
-			OUTPUT("  Submatch: " << subMatch << '\n');
-		}
+		STRIP(
+			std::cout << "Match: " << matchGroup.str() << '\n';
+			for (const auto& subMatch : matchGroup)
+			{
+				std::cout << "  Submatch: " << subMatch << '\n';
+			}
+		);
 
 		// emplace_back() constructs the tuple in place, avoiding a copy! Woah!
 		matches.emplace_back(matchGroup[1].str(), std::stoi(matchGroup[2]), std::stoi(matchGroup[3]));
 		searchStart = matchGroup.suffix().first;
 	}
 
-	OUTPUT("Matches as tuples:\n");
-	for (const auto& [operation, num1, num2] : matches)
-	{
-		OUTPUT(operation << " " << num1 << " " << num2 << '\n');
-	}
+	STRIP(
+		std::cout << "Matches as tuples:\n";
+		for (const auto& [operation, num1, num2] : matches)
+		{
+			std::cout << operation << " " << num1 << " " << num2 << '\n';
+		}
+	);
 
 	for (const auto& [operation, num1, num2] : matches)
 	{
@@ -66,7 +70,7 @@ auto Part2(const std::vector<std::string>& input)
 	std::string inputOneLine = "";
 	for (const auto& line : input)
 	{
-		OUTPUT(line << '\n');
+		STRIP(std::cout << line << '\n');
 		inputOneLine += line;
 	}
 
@@ -91,11 +95,13 @@ auto Part2(const std::vector<std::string>& input)
 	std::string::const_iterator searchStart(inputOneLine.cbegin());
 	while (std::regex_search(searchStart, inputOneLine.cend(), matchGroup, regex))
 	{
-		OUTPUT("Match: " << matchGroup.str() << '\n');
-		for (const auto& subMatch : matchGroup)
-		{
-			OUTPUT("  Submatch: " << subMatch << '\n');
-		}
+		STRIP(
+			std::cout << "Match: " << matchGroup.str() << '\n';
+			for (const auto& subMatch : matchGroup)
+			{
+				std::cout << "  Submatch: " << subMatch << '\n';
+			}
+		);
 
 		if (matchGroup.str() == "do()")
 		{
@@ -113,11 +119,13 @@ auto Part2(const std::vector<std::string>& input)
 		searchStart = matchGroup.suffix().first;
 	}
 
-	OUTPUT("Matches as tuples:\n");
-	for (const auto& [operation, num1, num2] : matches)
-	{
-		OUTPUT(operation << " " << num1 << " " << num2 << '\n');
-	}
+	STRIP(
+		std::cout << "Matches as tuples:\n";
+		for (const auto& [operation, num1, num2] : matches)
+		{
+			std::cout << operation << " " << num1 << " " << num2 << '\n';
+		}
+	);
 
 	for (const auto& [operation, num1, num2] : matches)
 	{
