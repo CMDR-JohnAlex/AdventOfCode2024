@@ -177,7 +177,77 @@ auto Part2(const std::vector<std::string>& input)
 		STRIP(std::cout << line << '\n');
 	}
 
-	return 0;
+	int xmasCount = 0;
+
+	// Oh, oh god...
+	// Look, the point is, it works...
+	for (int i = 0; i < input.size(); i++)
+	{
+		for (int j = 0; j < input.size(); j++)
+		{
+			if (input[i][j] == 'A')
+			{
+				try
+				{
+					if ((input.at(i - 1).at(j - 1) == 'M') && ((input.at(i + 1).at(j - 1) == 'M')))
+					{
+						if ((input.at(i + 1).at(j + 1) == 'S') && ((input.at(i - 1).at(j + 1) == 'S')))
+						{
+							xmasCount++;
+						}
+					}
+				}
+				catch (const std::out_of_range& e)
+				{
+					// Do nothing
+				}
+				try
+				{
+					if ((input.at(i - 1).at(j - 1) == 'S') && ((input.at(i + 1).at(j - 1) == 'S')))
+					{
+						if ((input.at(i + 1).at(j + 1) == 'M') && ((input.at(i - 1).at(j + 1) == 'M')))
+						{
+							xmasCount++;
+						}
+					}
+				}
+				catch (const std::out_of_range& e)
+				{
+					// Do nothing
+				}
+				try
+				{
+					if ((input.at(i - 1).at(j - 1) == 'M') && ((input.at(i + 1).at(j - 1) == 'S')))
+					{
+						if ((input.at(i + 1).at(j + 1) == 'S') && ((input.at(i - 1).at(j + 1) == 'M')))
+						{
+							xmasCount++;
+						}
+					}
+				}
+				catch (const std::out_of_range& e)
+				{
+					// Do nothing
+				}
+				try
+				{
+					if ((input.at(i - 1).at(j - 1) == 'S') && ((input.at(i + 1).at(j - 1) == 'M')))
+					{
+						if ((input.at(i + 1).at(j + 1) == 'M') && ((input.at(i - 1).at(j + 1) == 'S')))
+						{
+							xmasCount++;
+						}
+					}
+				}
+				catch (const std::out_of_range& e)
+				{
+					// Do nothing
+				}
+			}
+		}
+	}
+
+	return xmasCount;
 }
 
 int main(int argc, char** argv)
