@@ -140,7 +140,7 @@ auto Part2(const std::vector<std::string>& input)
 
 int main(int argc, char** argv)
 {
-	Utils::Timer timer("Day 02");
+	Utils::Timer timer("Day 03");
 	try
 	{
 #ifdef INPUT_TESTING

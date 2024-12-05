@@ -138,9 +138,9 @@ auto Part2(const std::vector<std::string>& input)
 		}
 		else // I'm not very proud of this mess...
 		{
+			std::vector<int> numbersCopy = numbers;
+			numbersCopy.erase(numbersCopy.begin() + unsafeIndex);
 			STRIP(std::cout << "Unsafe detected at index " << unsafeIndex << ". Trying to remove the unsafe number and check again.\n";
-				std::vector<int> numbersCopy = numbers;
-				numbersCopy.erase(numbersCopy.begin() + unsafeIndex);
 				std::cout << "Correction Attempt 1: (Remove index)\n";
 				for (int i = 0; i < numbersCopy.size(); i++)
 				{
