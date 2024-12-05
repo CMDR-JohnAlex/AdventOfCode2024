@@ -9,7 +9,7 @@
 | [2024 Day 1](https://adventofcode.com/2024/day/1)   | [ :star: ](Day01/main.cpp)  | [ :star: ](Day01/main.cpp)  |
 | [2024 Day 2](https://adventofcode.com/2024/day/2)   | [ :star: ](Day02/main.cpp)  | [ :star: ](Day02/main.cpp)  |
 | [2024 Day 3](https://adventofcode.com/2024/day/3)   | [ :star: ](Day03/main.cpp)  | [ :star: ](Day03/main.cpp)  |
-| [2024 Day 4](https://adventofcode.com/2024/day/4)   |                             |                             |
+| [2024 Day 4](https://adventofcode.com/2024/day/4)   | [ :star: ](Day04/main.cpp)  | [ :star: ](Day04/main.cpp)  |
 | [2024 Day 5](https://adventofcode.com/2024/day/5)   |                             |                             |
 | [2024 Day 6](https://adventofcode.com/2024/day/6)   |                             |                             |
 | [2024 Day 7](https://adventofcode.com/2024/day/7)   |                             |                             |
